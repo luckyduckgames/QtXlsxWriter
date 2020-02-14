@@ -2027,7 +2027,7 @@ int WorksheetPrivate::colPixelsSize(int col) const
         if (width < 1)
             pixels = static_cast<int>(width * (max_digit_width + padding) + 0.5);
         else
-            pixels = static_cast<int>(width * max_digit_width + 0.5) + padding;
+            pixels = static_cast<int>(static_cast<int>(width * max_digit_width + 0.5) + padding);
     } else {
         pixels = 64;
     }
@@ -2290,9 +2290,9 @@ void WorksheetPrivate::loadXmlSheetFormatProps(QXmlStreamReader &reader)
         } else if(attrib.name() == QLatin1String("defaultRowHeight")) {
             formatProps.defaultRowHeight = attrib.value().toString().toDouble();
         } else if(attrib.name() == QLatin1String("outlineLevelCol")) {
-            formatProps.outlineLevelCol = attrib.value().toString().toInt();
+            formatProps.outlineLevelCol = static_cast<quint8>(attrib.value().toString().toInt());
         } else if(attrib.name() == QLatin1String("outlineLevelRow")) {
-            formatProps.outlineLevelRow = attrib.value().toString().toInt();
+            formatProps.outlineLevelRow = static_cast<quint8>(attrib.value().toString().toInt());
         } else if(attrib.name() == QLatin1String("thickBottom")) {
             formatProps.thickBottom = attrib.value() == QLatin1String("1");
         } else if(attrib.name() == QLatin1String("thickTop")) {

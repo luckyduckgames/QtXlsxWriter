@@ -376,7 +376,8 @@ bool SharedStrings::loadFromXmlFile(QIODevice *device)
          if (token == QXmlStreamReader::StartElement) {
              if (reader.name() == QLatin1String("sst")) {
                  QXmlStreamAttributes attributes = reader.attributes();
-                 if ((hasUniqueCountAttr = attributes.hasAttribute(QLatin1String("uniqueCount"))))
+                 hasUniqueCountAttr = attributes.hasAttribute(QLatin1String("uniqueCount"));
+                 if (hasUniqueCountAttr)
                      count = attributes.value(QLatin1String("uniqueCount")).toString().toInt();
              } else if (reader.name() == QLatin1String("si")) {
                  readString(reader);
